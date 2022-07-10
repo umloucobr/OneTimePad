@@ -96,13 +96,15 @@ int decrypt() {
 		int keyToInt{ static_cast<int>(key[i] - 97) };
 		int textToInt{ static_cast<int>(text[i] - 97) };
 
-		int operationEncrypt{ textToInt - keyToInt };
-		if (operationEncrypt < 0)
+		int operationDecrypt{ textToInt - keyToInt };
+		if (operationDecrypt < 0)
 		{
-			operationEncrypt %= 26;
+			//I have no idea what this does, but C++ can't do modulo operation with negative numbers.
+			operationDecrypt = (26 >= 0 ? 26 : -26) - 1 + (operationDecrypt + 1) % 26;
 		}
-		char operationEncryptToChar{ static_cast<char>(operationEncrypt + 97) };
-		finalResult.push_back(operationEncryptToChar);
+
+		char operationDecryptToChar{ static_cast<char>(operationDecrypt + 97) };
+		finalResult.push_back(operationDecryptToChar);
 	}
 
 	std::cout << "Your text was decrypted using the key: " << key << ", and the final result was: " << finalResult << ".\n";
