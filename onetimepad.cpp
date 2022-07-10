@@ -36,10 +36,8 @@ int encrypt() {
 			int textToInt{ static_cast<int>(text[i] - 97) };
 
 			int operationEncrypt{ keyToInt + textToInt };
-			if (operationEncrypt > 26)
-			{
-				operationEncrypt %= 26;
-			}
+			operationEncrypt = operationEncrypt % 26;
+
 			char operationEncryptToChar{ static_cast<char>(operationEncrypt + 97) };
 			finalResult.push_back(operationEncryptToChar);
 		}
@@ -68,10 +66,8 @@ int encrypt() {
 			int textToInt{ static_cast<int>(text[i] - 97) };
 
 			int operationEncrypt{ keyToInt + textToInt };
-			if (operationEncrypt > 26)
-			{
-				operationEncrypt %= 26;
-			}
+			operationEncrypt = operationEncrypt % 26;
+
 			char operationEncryptToChar{ static_cast<char>(operationEncrypt + 97) };
 			finalResult.push_back(operationEncryptToChar);
 		}
@@ -100,10 +96,10 @@ int decrypt() {
 		int keyToInt{ static_cast<int>(key[i] - 97) };
 		int textToInt{ static_cast<int>(text[i] - 97) };
 
-		int operationEncrypt{ keyToInt - textToInt };
+		int operationEncrypt{ textToInt - keyToInt };
 		if (operationEncrypt < 0)
 		{
-			operationEncrypt += 26;
+			operationEncrypt %= 26;
 		}
 		char operationEncryptToChar{ static_cast<char>(operationEncrypt + 97) };
 		finalResult.push_back(operationEncryptToChar);
